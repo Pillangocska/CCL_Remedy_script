@@ -30,6 +30,7 @@ def moveToFirmAndCopy():
     pyautogui.hotkey('ctrl', 'c')
     global contact
     contact += pyperclip.paste()
+    contact += " "
 
 def moveToNameAndCopy():
     clickRemedy()
@@ -41,6 +42,7 @@ def moveToNameAndCopy():
     pyautogui.hotkey('ctrl', 'c')
     global contact
     contact += pyperclip.paste()
+    contact += " "
 
 def moveToNumberAndCopy():
     clickRemedy()
@@ -52,18 +54,23 @@ def moveToNumberAndCopy():
     pyautogui.hotkey('ctrl', 'c')
     global contact
     contact += pyperclip.paste()
+    contact += " "
 
 #get all data to your clipboard for a sign in 
 def signInFromRemedyToNotePad():
     moveToFirmAndCopy()
+    print(contact)
     moveToNameAndCopy()
+    print(contact)
     moveToNumberAndCopy()
+    print(contact)
 
 def signInToCCL():
     clickCCL()
     target = pyautogui.locateCenterOnScreen("contact_ccl.png",confidence=0.9)
     pyautogui.click(target.x+500,target.y)
-    pyautogui.typewrite(contact)
+    pyperclip.copy(contact)
+    pyautogui.hotkey('ctrl', 'v')
 
 def copySiteFromRemedyToCCL():
     clickRemedy()
@@ -76,20 +83,20 @@ def copySiteFromRemedyToCCL():
     clickCCL()
     site = pyautogui.locateCenterOnScreen("ccl_site.png",confidence=0.8)
     pyautogui.click(site.x+400,site.y)
+    time.sleep(5)
     site = pyautogui.locateCenterOnScreen("ccl_page.png",confidence=0.8)
     pyautogui.click(site.x,site.y+400)
     pyautogui.hotkey('ctrl', 'v')
-    time.sleep(2)
+    time.sleep(5)
     pyautogui.click(site.x,site.y+490)
 
 def setTimeInCCL():
     clickCCL()
     target = pyautogui.locateCenterOnScreen("enter_time.png",confidence=0.8)
     pyautogui.click(target.x+160,target.y)
-    target1 = pyautogui.locateCenterOnScreen("enter_time1.png",confidence=0.9)
-    pyautogui.click(target1)
-    target2 = pyautogui.locateCenterOnScreen("enter_time2.png",confidence=0.9)
-    pyautogui.click(target2)
+    time.sleep(0.01)
+    pyautogui.click(target.x+310,target.y-390)
+    pyautogui.click(target.x+310,target.y-40)
     
 def main():
     #setUPWorkCode()
