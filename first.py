@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import pyautogui
 import time
 import pyperclip
@@ -183,7 +184,8 @@ def main():
             copySiteFromRemedyToCCL()
             signInFromRemedyToNotePad()
             signInToCCL()
-            contact = "" #nem mukszik properly TODO
+            global contact
+            contact = ""
             setTimeInCCL()
         if event == "Close Power Cut":
             closePowerCut()
