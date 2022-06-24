@@ -1,20 +1,21 @@
 import pyautogui
 import time
 import pyperclip
+import PySimpleGUI as sg
 # image files must be in the same directory!!!
 # for debugging -> pyautogui.alert('This is the message to display.')
 global contact
 contact = ""
 # click functions for windows taskbar
 def clickRemedy():
-    remedy = pyautogui.locateCenterOnScreen("remedy_icon.png")
+    remedy = pyautogui.locateCenterOnScreen("sign_in_images\Remedy_icon.png")
     pyautogui.click(remedy)
 
 def clickCCL():
-    edge = pyautogui.locateCenterOnScreen("edge_icon.png")
+    edge = pyautogui.locateCenterOnScreen("sign_in_images\edge_icon.png")
     pyautogui.click(edge)
     time.sleep(0.5)
-    ccl_page = pyautogui.locateCenterOnScreen("ccl_page.png",confidence=.5)
+    ccl_page = pyautogui.locateCenterOnScreen("sign_in_images\ccl_page.png",confidence=.5)
     pyautogui.click(ccl_page)
 
 #functions for locating data inside remedy
@@ -22,10 +23,10 @@ def moveToFirmAndCopy():
     #first we open remedy
     clickRemedy()
     #moving to firm
-    comp = pyautogui.locateCenterOnScreen("remedy_comp.png",confidence=0.9)
+    comp = pyautogui.locateCenterOnScreen("sign_in_images\Remedy_comp.png",confidence=0.9)
     pyautogui.click(comp.x+100,comp.y+2)
     pyautogui.rightClick()
-    select = pyautogui.locateCenterOnScreen("select_all.png")
+    select = pyautogui.locateCenterOnScreen("sign_in_images\select_all.png")
     pyautogui.click(select)
     pyautogui.hotkey('ctrl', 'c')
     global contact
@@ -34,10 +35,10 @@ def moveToFirmAndCopy():
 
 def moveToNameAndCopy():
     clickRemedy()
-    Iname = pyautogui.locateCenterOnScreen("remedy_name.png",confidence=.8)
+    Iname = pyautogui.locateCenterOnScreen("sign_in_images\Remedy_name.png",confidence=.8)
     pyautogui.click(Iname.x+150,Iname.y+2)
     pyautogui.rightClick()
-    select = pyautogui.locateCenterOnScreen("select_all.png")
+    select = pyautogui.locateCenterOnScreen("sign_in_images\select_all.png")
     pyautogui.click(select)
     pyautogui.hotkey('ctrl', 'c')
     global contact
@@ -46,10 +47,10 @@ def moveToNameAndCopy():
 
 def moveToNumberAndCopy():
     clickRemedy()
-    phone = pyautogui.locateCenterOnScreen("remedy_phone.png",confidence=.8)
+    phone = pyautogui.locateCenterOnScreen("sign_in_images\Remedy_phone.png",confidence=.8)
     pyautogui.click(phone.x+10,phone.y+30)
     pyautogui.rightClick()
-    select = pyautogui.locateCenterOnScreen("select_all.png")
+    select = pyautogui.locateCenterOnScreen("sign_in_images\select_all.png")
     pyautogui.click(select)
     pyautogui.hotkey('ctrl', 'c')
     global contact
@@ -59,51 +60,118 @@ def moveToNumberAndCopy():
 #get all data to your clipboard for a sign in 
 def signInFromRemedyToNotePad():
     moveToFirmAndCopy()
-    print(contact)
     moveToNameAndCopy()
-    print(contact)
     moveToNumberAndCopy()
-    print(contact)
 
 def signInToCCL():
     clickCCL()
-    target = pyautogui.locateCenterOnScreen("contact_ccl.png",confidence=0.9)
+    target = pyautogui.locateCenterOnScreen("sign_in_images\contact_ccl.png",confidence=0.9)
     pyautogui.click(target.x+500,target.y)
     pyperclip.copy(contact)
     pyautogui.hotkey('ctrl', 'v')
 
 def copySiteFromRemedyToCCL():
     clickRemedy()
-    target = pyautogui.locateCenterOnScreen("site_code.png",confidence=0.8)
+    target = pyautogui.locateCenterOnScreen("sign_in_images\site_code.png",confidence=0.8)
     pyautogui.click(target.x-200,target.y)
     pyautogui.rightClick(target.x-200,target.y)
-    select = pyautogui.locateCenterOnScreen("select_all.png",confidence=0.8)
+    select = pyautogui.locateCenterOnScreen("sign_in_images\select_all.png",confidence=0.8)
     pyautogui.click(select)
     pyautogui.hotkey('ctrl', 'x')
     clickCCL()
-    site = pyautogui.locateCenterOnScreen("ccl_site.png",confidence=0.8)
+    site = pyautogui.locateCenterOnScreen("sign_in_images\ccl_site.png",confidence=0.8)
     pyautogui.click(site.x+400,site.y)
-    time.sleep(5)
-    site = pyautogui.locateCenterOnScreen("ccl_page.png",confidence=0.8)
+    time.sleep(4)
+    site = pyautogui.locateCenterOnScreen("sign_in_images\ccl_page.png",confidence=0.8)
     pyautogui.click(site.x,site.y+400)
     pyautogui.hotkey('ctrl', 'v')
-    time.sleep(5)
+    time.sleep(4)
     pyautogui.click(site.x,site.y+490)
 
 def setTimeInCCL():
     clickCCL()
-    target = pyautogui.locateCenterOnScreen("enter_time.png",confidence=0.8)
+    target = pyautogui.locateCenterOnScreen("sign_in_images\enter_time.png",confidence=0.8)
     pyautogui.click(target.x+160,target.y)
     time.sleep(0.01)
     pyautogui.click(target.x+310,target.y-390)
     pyautogui.click(target.x+310,target.y-40)
-    
+
+#Setting time for the end of pwcut
+def closePowerCut1():
+    closing_time = pyautogui.prompt(text="",title="Enter the closing time")
+    clickCCL()
+    target1 = pyautogui.locateCenterOnScreen("pwcut_images\datum.png",confidence=0.8)
+    pyautogui.click(target1)
+    time.sleep(0.2)
+    target2 = pyautogui.locateCenterOnScreen("pwcut_images\datum2.png",confidence=0.8)
+    pyautogui.click(target2)
+    time.sleep(0.2)
+    pyautogui.click(target2.x+30,target2.y+50)
+    for i in range(5):
+        pyautogui.press('backspace')
+    pyautogui.typewrite(closing_time)
+    pyautogui.hotkey('enter')
+    pyautogui.hotkey('enter')
+
+#Setting closure code, solution and cause
+def closePowerCut2():
+    target1 = pyautogui.locateCenterOnScreen("pwcut_images\closure_code.png",confidence=0.8)
+    pyautogui.click(target1)
+    pyautogui.click(target1.x,target1.y+30)
+    pyautogui.click(target1.x,target1.y+80)
+    target2 = pyautogui.locateCenterOnScreen("pwcut_images\solution.png",confidence=0.8)
+    pyautogui.click(target2.x,target2.y+40)
+    pyautogui.typewrite("Power supply is back")
+    target3 = pyautogui.locateCenterOnScreen("pwcut_images\cause.png",confidence=0.8)
+    pyautogui.click(target3.x,target3.y+20)
+    pyautogui.typewrite("hard")
+    time.sleep(0.5)
+    pyautogui.click(target3.x+350,target3.y-380)
+
+#Scrolling down for comment and closing inc
+def closePowerCut3():
+    pyautogui.scroll(-1000)
+    time.sleep(1)
+    target1 = pyautogui.locateCenterOnScreen("pwcut_images\enter_comment.png",confidence=0.8)
+    pyautogui.click(target1.x,target1.y+50)
+    pyautogui.typewrite("Power supply is back")
+    target2 = pyautogui.locateCenterOnScreen("pwcut_images\okey.png",confidence=0.8)
+    pyautogui.click(target2)
+    time.sleep(3)
+    target3 = pyautogui.locateCenterOnScreen("pwcut_images\confirm.png",confidence=0.8)
+    time.sleep(2)
+    pyautogui.click(target3)  #not working properly TODO  
+
+#dif steps for unittest
+def closePowerCut():
+    closePowerCut1()
+    closePowerCut2()
+    closePowerCut3()
+
 def main():
-    #setUPWorkCode()
-    copySiteFromRemedyToCCL()
-    signInFromRemedyToNotePad()
-    signInToCCL()
-    setTimeInCCL()
+    sg.theme('DarkPurple4')
+    layout = [[sg.Text("Choose one!")], 
+    [sg.Button("Remedy to Conclusion")],
+    [sg.Button("Close Power Cut")],
+    [sg.Button("Exit")]]
+    window = sg.Window("Kill me", layout, size=(400,300),icon='pwcut_images\sadfrog.ico',)
+    # Create an event loop
+    while True:
+        event, values = window.read()
+        if event == "Remedy to Conclusion":
+            copySiteFromRemedyToCCL()
+            signInFromRemedyToNotePad()
+            signInToCCL()
+            pyperclip = " "#not working yet TODO
+            setTimeInCCL()
+        if event == "Close Power Cut":
+            closePowerCut()
+        # End program if user closes window or presses the OK button
+        if event == "Exit" or event == sg.WIN_CLOSED:
+            break
+
+    window.close()
+
 
 if __name__ == '__main__':
     main()
