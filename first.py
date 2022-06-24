@@ -148,24 +148,47 @@ def closePowerCut():
     closePowerCut2()
     closePowerCut3()
 
+def closeSiteEntry():
+    clickCCL()
+    target1 = pyautogui.locateCenterOnScreen("close_se_images\close_site_entry.png",confidence=0.8)
+    pyautogui.click(target1)
+    time.sleep(0.5)
+    target2 = pyautogui.locateCenterOnScreen("close_se_images\datum_cse.png",confidence=0.8)
+    pyautogui.click(target2)
+    time.sleep(0.5)
+    target3 = pyautogui.locateCenterOnScreen("close_se_images\Blabla.png",confidence=0.8)
+    pyautogui.click(target3.x-10,target3.y)
+    time.sleep(0.5)
+    target4 = pyautogui.locateCenterOnScreen("close_se_images\confirm3213.png",confidence=0.8)
+    pyautogui.click(target4)
+    time.sleep(0.5)
+    target5 = pyautogui.locateCenterOnScreen("close_se_images\ok3213.png",confidence=0.8)
+    pyautogui.click(target5)
+    time.sleep(0.5)
+    target6 = pyautogui.locateCenterOnScreen("close_se_images\close3213.png",confidence=0.8)
+    pyautogui.click(target6)
+
 def main():
     sg.theme('DarkPurple4')
     layout = [[sg.Text("Choose one!")], 
-    [sg.Button("Remedy to Conclusion")],
+    [sg.Button("Remedy To Conclusion")],
     [sg.Button("Close Power Cut")],
+    [sg.Button("Close Site Entry")],
     [sg.Button("Exit")]]
     window = sg.Window("Kill me", layout, size=(400,300),icon='pwcut_images\sadfrog.ico',)
     # Create an event loop
     while True:
         event, values = window.read()
-        if event == "Remedy to Conclusion":
+        if event == "Remedy To Conclusion":
             copySiteFromRemedyToCCL()
             signInFromRemedyToNotePad()
             signInToCCL()
-            pyperclip = " "#not working yet TODO
+            contact = "" #nem mukszik properly TODO
             setTimeInCCL()
         if event == "Close Power Cut":
             closePowerCut()
+        if event == "Close Site Entry":
+            closeSiteEntry()
         # End program if user closes window or presses the OK button
         if event == "Exit" or event == sg.WIN_CLOSED:
             break
