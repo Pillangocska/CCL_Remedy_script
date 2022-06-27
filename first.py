@@ -139,9 +139,9 @@ def closePowerCut3():
     target2 = pyautogui.locateCenterOnScreen("pwcut_images\okey.png",confidence=0.8)
     pyautogui.click(target2)
     time.sleep(3)
-    target3 = pyautogui.locateCenterOnScreen("pwcut_images\confirm.png",confidence=0.8)
-    time.sleep(2)
-    pyautogui.click(target3)  #not working properly TODO  
+    #target3 = pyautogui.locateCenterOnScreen("pwcut_images\confirm.png",confidence=0.8)
+    #time.sleep(2)
+    #pyautogui.click(target3)  #not working properly TODO  
 
 #dif steps for unittest
 def closePowerCut():
