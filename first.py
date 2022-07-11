@@ -82,11 +82,11 @@ def copySiteFromRemedyToCCL():
     clickCCL()
     site = pyautogui.locateCenterOnScreen("sign_in_images\ccl_site.png",confidence=0.8)
     pyautogui.click(site.x+400,site.y)
-    time.sleep(4)
+    time.sleep(1)
     site = pyautogui.locateCenterOnScreen("sign_in_images\ccl_page.png",confidence=0.8)
     pyautogui.click(site.x,site.y+400)
     pyautogui.hotkey('ctrl', 'v')
-    time.sleep(4)
+    time.sleep(1)
     pyautogui.click(site.x,site.y+490)
 
 def setTimeInCCL():
@@ -139,9 +139,11 @@ def closePowerCut3():
     target2 = pyautogui.locateCenterOnScreen("pwcut_images\okey.png",confidence=0.8)
     pyautogui.click(target2)
     time.sleep(3)
-    #target3 = pyautogui.locateCenterOnScreen("pwcut_images\confirm.png",confidence=0.8)
-    #time.sleep(2)
-    #pyautogui.click(target3)  #not working properly TODO  
+    target3 = pyautogui.locateCenterOnScreen("pwcut_images\confirm.png",confidence=0.8)
+    time.sleep(2)
+    pyautogui.click(target3)  #not working properly TODO
+    target4 = pyautogui.locateCenterOnScreen("pwcut_images\okey.png",confidence=0.8)  
+    pyautogui.click(target3)
 
 #dif steps for unittest
 def closePowerCut():
@@ -171,7 +173,8 @@ def closeSiteEntry():
 
 def main():
     sg.theme('DarkPurple4')
-    layout = [[sg.Text("Choose one!")], 
+    layout = [[sg.Text("Choose one!")],
+    [sg.Button("Remedy To Conclusion INC")], 
     [sg.Button("Remedy To Conclusion")],
     [sg.Button("Close Power Cut")],
     [sg.Button("Close Site Entry")],
@@ -180,6 +183,12 @@ def main():
     # Create an event loop
     while True:
         event, values = window.read()
+        if event == "Remedy To Conclusion INC":
+            signInFromRemedyToNotePad()
+            signInToCCL()
+            #global contact
+            #contact = ""
+            setTimeInCCL()
         if event == "Remedy To Conclusion":
             copySiteFromRemedyToCCL()
             signInFromRemedyToNotePad()
