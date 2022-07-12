@@ -173,27 +173,30 @@ def closeSiteEntry():
 
 def main():
     sg.theme('DarkPurple4')
-    layout = [[sg.Text("Choose one!")],
+    layout = [
     [sg.Button("Remedy To Conclusion INC")], 
     [sg.Button("Remedy To Conclusion")],
     [sg.Button("Close Power Cut")],
     [sg.Button("Close Site Entry")],
-    [sg.Button("Exit")]]
-    window = sg.Window("Kill me", layout, size=(400,300),icon='pwcut_images\sadfrog.ico',)
+    [sg.Button("Exit")]
+    ]
+    window = sg.Window("Kill me", layout, size=(400,300),
+                    icon='pwcut_images\sadfrog.ico',background_color='green',
+                    transparent_color='green',grab_anywhere=True)
+    global contact
     # Create an event loop
     while True:
         event, values = window.read()
         if event == "Remedy To Conclusion INC":
             signInFromRemedyToNotePad()
             signInToCCL()
-            #global contact
-            #contact = ""
+            contact = ""
             setTimeInCCL()
         if event == "Remedy To Conclusion":
             copySiteFromRemedyToCCL()
             signInFromRemedyToNotePad()
             signInToCCL()
-            global contact
+            #global contact
             contact = ""
             setTimeInCCL()
         if event == "Close Power Cut":
