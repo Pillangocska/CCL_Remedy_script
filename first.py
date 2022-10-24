@@ -31,7 +31,6 @@ def moveToFirmAndCopy():
     try:
         #first we open remedy
         clickRemedy()
-        #moving to firm
         comp = pyautogui.locateCenterOnScreen("sign_in_images\Remedy_comp.png",confidence=0.9)
         pyautogui.click(comp.x+100,comp.y+2)
         pyautogui.rightClick()
@@ -172,9 +171,9 @@ def closePowerCut3():
         pyautogui.typewrite("Power supply is back")
         target2 = pyautogui.locateCenterOnScreen("pwcut_images\okey.png",confidence=0.8)
         pyautogui.click(target2)
-        time.sleep(3)
+        time.sleep(2)
         target3 = pyautogui.locateCenterOnScreen("pwcut_images\confirm.png",confidence=0.8)
-        time.sleep(3)
+        time.sleep(2)
         pyautogui.click(target3)  #not working properly TODO
         pyautogui.click(target3.x+650,target3.y-40)
     except Exception:
@@ -185,6 +184,9 @@ def closePowerCut():
     closePowerCut1()
     closePowerCut2()
     closePowerCut3()
+
+def closeINC():
+    print("kaki")
 
 def closeSiteEntry():
     clickCCL()
@@ -213,9 +215,10 @@ def main():
     [sg.Button("Remedy To Conclusion")],
     [sg.Button("Close Power Cut")],
     [sg.Button("Close Site Entry")],
+    [sg.Button("Close INC")],
     [sg.Button("Exit")]
     ]
-    window = sg.Window("Kill me", layout, size=(400,300),
+    window = sg.Window("Kys", layout, size=(300,300),
                     icon='pwcut_images\sadfrog.ico',background_color='green',
                     transparent_color='green',grab_anywhere=True)
     global contact
@@ -238,6 +241,8 @@ def main():
             closePowerCut()
         if event == "Close Site Entry":
             closeSiteEntry()
+        if event == "Close INC":
+            closeINC()
         # End program if user closes window or presses the OK button
         if event == "Exit" or event == sg.WIN_CLOSED:
             break
@@ -247,42 +252,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-###################
-#garbage_collector#
-###################
-#def clickNotePad():
-#    notepad = pyautogui.locateCenterOnScreen("notepad_icon.png")
-#    pyautogui.click(notepad)
-#copies clipboard content to notepad
-#def copyClipboardToNotePad():
-#    clickNotePad()
-#    time.sleep(0.5)
-#    target = pyautogui.locateCenterOnScreen("notepad_target.png",confidence=.8)
-#    pyautogui.click(target.x+600,target.y+20)
-#    pyautogui.hotkey('ctrl', 'v')
-#    pyautogui.press('space')
-#####################################
-#def copyWorkCodeFromRemedy():
-#    clickRemedy()
-#    pyautogui.click(1200,270)
-#    pyautogui.dragRel(-300, 0, 0.4)
-#    pyautogui.hotkey('ctrl', 'x')
-#def pasteWorkCodeToCCLAndClickCode():
-#    clickCCL()
-#    pyautogui.click(500,180)
-#    for i in range(15):
-#        pyautogui.press('backspace')  
-#    pyautogui.hotkey('ctrl', 'v')
-#    time.sleep(1)
-#    pyautogui.click(450,220)
-#def clickEntryOnWorkCode():
-#    pyautogui.click(580,700)
-#    time.sleep(1)
-#   pyautogui.click(540,830)
-#def setUPWorkCode():
-#    #needs some work only for chr's now
-#    copyWorkCodeFromRemedy()
-#    pasteWorkCodeToCCLAndClickCode()
-#    time.sleep(2) #could be more idk
-#    clickEntryOnWorkCode()
